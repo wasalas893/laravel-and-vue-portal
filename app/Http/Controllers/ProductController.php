@@ -20,7 +20,7 @@ class ProductController extends Controller
             'slug'=>'required',
             'price'=>'required'
         ]);
-   
+
         return Product::create($request->all());
 
     }
@@ -40,14 +40,14 @@ class ProductController extends Controller
     public function Delete($id){
 
         return Product::destroy($id);
-        
-   
+
+
     }
     public function Search($name){
 
         return Product::where('name','like','%'.$name.'%')->get();
-        
-   
+
+
     }
-    
+
 }

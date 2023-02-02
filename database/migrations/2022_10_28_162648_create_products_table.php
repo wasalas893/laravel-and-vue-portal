@@ -17,8 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('description')->nullable();
-            $table->decimal('price',5,2); 
+            $table->decimal('price',5,2);
             $table->timestamps();
         });
     }
