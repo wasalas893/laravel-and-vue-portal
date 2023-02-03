@@ -1,70 +1,41 @@
+<style>
+
+.login {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    margin-top: 100px;
+}
+form {
+    width: 35%;
+}
+</style>
+
+
 <template>
-    <div>
-        <div class="bg-overlay"></div>
-        <div class="wrapper-page">
-            <div class="container-fluid p-0">
-                <div class="card">
-                    <div class="card-body">
+    <div class="login">
 
-                        <div class="text-center mt-4">
-                            <div class="mb-3">
-                                <router-view to="/login" class="auth-logo">
-                                    <img src="/assets/images/logo-dark.png" height="30" class="logo-dark mx-auto" alt="">
-                                    <img src="/assets/images/logo-light.png" height="30" class="logo-light mx-auto" alt="">
-                                </router-view>
-                            </div>
-                        </div>
+        <form @submit.prevent="submit">
+            <span v-if="errormessage" class="error-message">{{ errormessage }}</span>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" v-model="email" class="form-control" placeholder="Enter email">
+              <span v-if="validationErrors.email" class="error-message">{{ validationErrors.email[0] }}</span>
 
-                        <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
-
-                        <div class="p-3">
-                            <form class="form-horizontal mt-3" @submit.prevent="submit">
-                                <span v-if="errormessage" class="error-message">{{ errormessage }}</span>
-
-                                <div class="form-group mb-3 row">
-                                    <div class="col-12">
-                                        <input v-model="email" class="form-control" type="email"  placeholder="Email">
-                                        <span v-if="validationErrors.email" class="error-message">{{ validationErrors.email[0] }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-3 row">
-                                    <div class="col-12">
-                                        <input v-model="password" class="form-control" type="password"  placeholder="Password">
-                                        <span v-if="validationErrors.password" class="error-message">{{ validationErrors.password[0] }}</span>
-
-
-                                    </div>
-                                </div>
-
-
-
-                                <div class="form-group mb-3 text-center row mt-3 pt-1">
-                                    <div class="col-12">
-                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Log In</button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-0 row mt-2">
-
-                                    <div class="col-sm-5 mt-3">
-                                        <router-view to="/register" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</router-view>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- end -->
-                    </div>
-                    <!-- end cardbody -->
-                </div>
-                <!-- end card -->
             </div>
-            <!-- end container -->
-        </div>
-        <!-- end -->
-
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" v-model="password" class="form-control"  placeholder="Password">
+              <span v-if="validationErrors.password" class="error-message">{{ validationErrors.password[0] }}</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
     </div>
+
+
 </template>
+
 
 
 <script>
